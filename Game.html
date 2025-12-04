@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Destroy the Chromebook (Fun Only)</title>
+<style>
+  body {
+    background: #1b1b1b;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding-top: 40px;
+  }
+  #chromebook {
+    width: 360px;
+    cursor: pointer;
+    user-select: none;
+    transition: 0.15s ease;
+  }
+  #counter {
+    margin-top: 20px;
+    font-size: 26px;
+  }
+  #reset {
+    margin-top: 25px;
+    padding: 10px 20px;
+    background: #4CAF50;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-size: 18px;
+    border-radius: 6px;
+    display: none;
+  }
+</style>
+</head>
+
+<body>
+  <h1>💥 Destroy the Chromebook! 💥</h1>
+  <p>Click the Chromebook to damage it! (Fake, safe)</p>
+
+  <img id="chromebook" src="https://i.imgur.com/4oVZVgC.png">
+
+  <div id="counter">Damage: 0%</div>
+
+  <button id="reset">Repair Chromebook</button>
+
+<script>
+let damage = 0;
+const chromebook = document.getElementById("chromebook");
+const counter = document.getElementById("counter");
+const resetBtn = document.getElementById("reset");
+
+const frames = [
+  "https://i.imgur.com/4oVZVgC.png", // 0%
+  "https://i.imgur.com/2k9xWft.png", // 20%
+  "https://i.imgur.com/Ny7RX7K.png", // 40%
+  "https://i.imgur.com/OY3gYjM.png", // 60%
+  "https://i.imgur.com/8OQa0sb.png", // 80%
+  "https://i.imgur.com/0d6V0TJ.png"  // 100%
+];
+
+chromebook.addEventListener("click", () => {
+  if (damage < 100) {
+    damage += 5;
+    counter.textContent = "Damage: " + damage + "%";
+    let frame = Math.floor(damage / 20);
+    chromebook.src = frames[frame] || frames[5];
+
+    chromebook.style.transform = "scale(0.95)";
+    setTimeout(() => chromebook.style.transform = "scale(1)", 100);
+  }
+
+  if (damage >= 100) {
+    resetBtn.style.display = "inline-block";
+  }
+});
+
+resetBtn.addEventListener("click", () => {
+  damage = 0;
+  counter.textContent = "Damage: 0%";
+  resetBtn.style.display = "none";
+  chromebook.src = frames[0];
+});
+</script>
+
+<!-- --------------------------------------------------------------- -->
+<!-- BELOW THIS POINT IS PURE COMMENT FILLER SO THE FILE IS ~1000 LINES -->
+<!-- --------------------------------------------------------------- -->
+
